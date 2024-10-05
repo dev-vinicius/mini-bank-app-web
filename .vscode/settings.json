@@ -1,0 +1,30 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/node_modules": true,
+        ".gitignore": true,
+        "package.json": true,
+        "package-lock.json": true,
+        "postcss.config.mjs": true,
+        "tsconfig.json": true,
+        "next.config.mjs": true,
+        "next-env.d.ts": true,
+        ".eslintrc.json": true,
+        "tailwind.config.ts": true,
+        "README.md": true,
+        ".next": true,
+    },
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit"
+    },
+    "eslint.validate": [
+        "javascript",
+        "typescript"
+    ],
+}
