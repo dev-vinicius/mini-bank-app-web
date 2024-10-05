@@ -40,7 +40,7 @@ export default async function AccountPage({params}: AccountParams) {
                     currency: 'BRL',
                     })}</p>
             </div>
-            <div className="flex justify-between mt-20">
+            <div className="flex flex-wrap justify-center mt-20 gap-6 md:gap-0 md:justify-between">
                 <DialogCreditTransaction accountId={params.id}/>
                 <DialogDebitTransaction accountId={params.id}/>
                 <DialogTransferTransaction accountId={params.id}/>
