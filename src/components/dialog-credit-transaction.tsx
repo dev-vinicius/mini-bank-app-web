@@ -73,7 +73,7 @@ export function DialogCreditTransaction({ accountId }: DialogCreditTransactionPr
                             className="mt-1"/>
 
                         <Button type="submit"
-                            className="mt-4 bg-blue-500 hover:bg-blue-600">
+                            className="mt-4 bg-blue-400 hover:bg-blue-600">
                             Creditar
                         </Button>
                     </form>

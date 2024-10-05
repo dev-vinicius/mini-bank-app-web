@@ -88,7 +88,7 @@ export function DialogTransferTransaction({accountId}: DialogTransferTransaction
                             className="mt-1"/>
 
                         <Button type="submit"
-                            className="mt-4 bg-blue-500 hover:bg-blue-600">
+                            className="mt-4 bg-blue-400 hover:bg-blue-600">
                             Transferir
                         </Button>
                     </form>

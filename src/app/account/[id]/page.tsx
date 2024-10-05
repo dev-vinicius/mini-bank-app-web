@@ -4,6 +4,9 @@ import { getTransactions } from "@/services/transaction-service";
 import { DialogCreditTransaction } from "@/components/dialog-credit-transaction";
 import { DialogDebitTransaction } from "@/components/dialog-debit-transaction";
 import { DialogTransferTransaction } from "@/components/dialog-transfer-transaction";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
 
 interface AccountParams {
     params: {
@@ -16,8 +19,19 @@ export default async function AccountPage({params}: AccountParams) {
     const transactions = await getTransactions(params.id)
     return (
         <div>
-            <div className="flex gap-2 items-center">
-                <div className="bg-gray-300 rounded-full w-10 h-10"></div>
+            <div>
+                <Link href="/"
+                    className="bg-blue-400 hover:bg-blue-600 text-white font-semibold p-2 rounded w-28 flex justify-center items-center gap-2">
+                        <ArrowLeft />
+                        <span>Voltar</span>
+                </Link>
+            </div>
+            <div className="flex gap-2 items-center mt-6">
+                <Image src={`https://i.pravatar.cc/300?img=${account.id}`} 
+                    alt={account.name} 
+                    width={60} 
+                    height={60}
+                    className="rounded-full" />
                 <p className="text-2xl font-semibold">Ola, {account.name}</p>
             </div>
             <div className="mt-6">
