@@ -12,6 +12,8 @@ import {
     DialogTrigger,
   } from "@/components/ui/dialog"
 import { useState } from "react"
+import { CurrencyInput } from "./ui/currency-input"
+import { formatDecimal } from "@/lib/decimal-format"
 
 interface DialogTransferTransactionProps {
     accountId: number
@@ -26,7 +28,7 @@ export function DialogTransferTransaction({accountId}: DialogTransferTransaction
         const formData = new FormData(event.currentTarget)
         const data = Object.fromEntries(formData)
 
-        if (data.value == "" || Number(data.value) <= 0) {
+        if (data.value == "") {
             toast({
                 title: "Erro ao realizar transação",
                 description: "O valor da transação deve ser maior que 0",
@@ -43,8 +45,8 @@ export function DialogTransferTransaction({accountId}: DialogTransferTransaction
             })
             return;
         }
-
-        const result = await createTransferTransactionAction(accountId, Number(data.destinationAccountId), Number(data.value))
+        const value = formatDecimal(data.value)
+        const result = await createTransferTransactionAction(accountId, Number(data.destinationAccountId), value)
         if (result.success) {
             toast({
                 title: "Transação realizada com sucesso",
@@ -82,8 +84,7 @@ export function DialogTransferTransaction({accountId}: DialogTransferTransaction
                             className="mt-1"/>
 
                         <label className="block mt-4 font-semibold">Valor</label>
-                        <Input name="value" 
-                            type="number"
+                        <CurrencyInput name="value"
                             placeholder="0,00"
                             className="mt-1"/>
 

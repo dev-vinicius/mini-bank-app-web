@@ -1,5 +1,4 @@
 'use client'
-import { Input } from "@/components/ui/input"
 import { Button } from "./ui/button"
 import { createDebitTransactionAction } from "@/actions/transactions"
 import { useToast } from "@/hooks/use-toast"
@@ -12,6 +11,8 @@ import {
     DialogTrigger,
   } from "@/components/ui/dialog"
 import { useState } from "react"
+import { formatDecimal } from "@/lib/decimal-format"
+import { CurrencyInput } from "./ui/currency-input"
 
 interface DialogDebitTransactionProps {
     accountId: number
@@ -26,7 +27,7 @@ export function DialogDebitTransaction({accountId}: DialogDebitTransactionProps)
         const formData = new FormData(event.currentTarget)
         const data = Object.fromEntries(formData)
 
-        if (data.value == "" || Number(data.value) <= 0) {
+        if (data.value == "") {
             toast({
                 title: "Erro ao realizar transação",
                 description: "O valor da transação deve ser maior que 0",
@@ -34,8 +35,9 @@ export function DialogDebitTransaction({accountId}: DialogDebitTransactionProps)
             })
             return;
         }
-
-        const result = await createDebitTransactionAction(accountId, Number(data.value))
+        
+        const value = formatDecimal(data.value)
+        const result = await createDebitTransactionAction(accountId, value)
         if (result.success) {
             toast({
                 title: "Transação realizada com sucesso",
@@ -67,8 +69,7 @@ export function DialogDebitTransaction({accountId}: DialogDebitTransactionProps)
                 <DialogDescription>
                     <form onSubmit={handleSubmit}>
                         <label className="block mt-4 font-semibold">Valor</label>
-                        <Input name="value" 
-                            type="number"
+                        <CurrencyInput name="value"
                             placeholder="0,00"
                             className="mt-1"/>
 

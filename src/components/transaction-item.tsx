@@ -24,12 +24,13 @@ export function TransactionItem({transaction}: TransactionItemProps) {
             </div>
             <div className="flex flex-col items-end gap-2">
                 
-                {transaction.operationType !== 0 && 
+                {transaction.operationType !== 0 && !transaction.transferRecieved && 
                 <p className="text-xl font-semibold text-red-600">
                     - {transaction.value.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
                 </p>}
 
-                {transaction.operationType === 0 &&
+                {(transaction.operationType === 0 || 
+                 (transaction.operationType === 2 && transaction.transferRecieved)) &&
                 <p className="text-xl font-semibold text-green-600">
                     + {transaction.value.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
                 </p>}

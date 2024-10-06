@@ -1,5 +1,4 @@
 'use client'
-import { Input } from "@/components/ui/input"
 import { Button } from "./ui/button"
 import { createCreditTransactionAction } from "@/actions/transactions"
 import { useToast } from "@/hooks/use-toast"
@@ -12,6 +11,8 @@ import {
     DialogTrigger,
   } from "@/components/ui/dialog"
 import { useState } from "react"
+import { CurrencyInput } from "./ui/currency-input"
+import { formatDecimal } from "@/lib/decimal-format"
 
 interface DialogCreditTransactionProps {
     accountId: number
@@ -25,8 +26,7 @@ export function DialogCreditTransaction({ accountId }: DialogCreditTransactionPr
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         const data = Object.fromEntries(formData)
-
-        if (data.value == "" || Number(data.value) <= 0) {
+        if (data.value == "") {
             toast({
                 title: "Erro ao realizar transação",
                 description: "O valor da transação deve ser maior que 0",
@@ -35,7 +35,8 @@ export function DialogCreditTransaction({ accountId }: DialogCreditTransactionPr
             return;
         }
 
-        const result = await createCreditTransactionAction(accountId, Number(data.value))
+        const value = formatDecimal(data.value)
+        const result = await createCreditTransactionAction(accountId, value)
         if (result.success) {
             toast({
                 title: "Transação realizada com sucesso",
@@ -49,7 +50,6 @@ export function DialogCreditTransaction({ accountId }: DialogCreditTransactionPr
                 description: result.error,
                 variant: "destructive",
             })
-            setOpen(false)
         }
     }
 
@@ -67,8 +67,7 @@ export function DialogCreditTransaction({ accountId }: DialogCreditTransactionPr
                 <DialogDescription>
                     <form onSubmit={handleSubmit}>
                         <label className="block mt-4 font-semibold">Valor</label>
-                        <Input name="value" 
-                            type="number"
+                        <CurrencyInput name="value"
                             placeholder="0,00"
                             className="mt-1"/>
 
