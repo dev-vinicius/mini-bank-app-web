@@ -60,7 +60,6 @@ export function DialogTransferTransaction({accountId}: DialogTransferTransaction
                 description: result.error,
                 variant: "destructive",
             })
-            setOpen(false)
         }
     }
 
@@ -81,7 +80,9 @@ export function DialogTransferTransaction({accountId}: DialogTransferTransaction
                         <Input name="destinationAccountId" 
                             type="number"
                             placeholder="Informe o número da conta"
-                            className="mt-1"/>
+                            className="mt-1"
+                            autoComplete="off"
+                             />
 
                         <label className="block mt-4 font-semibold">Valor</label>
                         <CurrencyInput name="value"

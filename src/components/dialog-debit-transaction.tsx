@@ -51,7 +51,6 @@ export function DialogDebitTransaction({accountId}: DialogDebitTransactionProps)
                 description: result.error,
                 variant: "destructive",
             })
-            setOpen(false)
         }
     }
 
@@ -71,7 +70,9 @@ export function DialogDebitTransaction({accountId}: DialogDebitTransactionProps)
                         <label className="block mt-4 font-semibold">Valor</label>
                         <CurrencyInput name="value"
                             placeholder="0,00"
-                            className="mt-1"/>
+                            className="mt-1"
+                            autoComplete="off"
+                             />
 
                         <Button type="submit"
                             className="mt-4 bg-blue-400 hover:bg-blue-600">

@@ -43,7 +43,8 @@ export function FormNewAccount() {
             <Input type="text" 
                 name="name" 
                 placeholder="Informe seu nome..." 
-                className="mt-2"/>
+                className="mt-2"
+                autoComplete="off" />
 
             <Button type="submit" className="max-w-[200px] bg-blue-400 hover:bg-blue-600 mt-2">Cadastrar</Button>
         </form>
